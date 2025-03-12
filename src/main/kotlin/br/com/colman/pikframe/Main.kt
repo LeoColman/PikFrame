@@ -1,3 +1,5 @@
+package br.com.colman.pikframe
+
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
