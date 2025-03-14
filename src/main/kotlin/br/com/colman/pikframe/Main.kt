@@ -37,7 +37,6 @@ fun App(
     val children = remember(directory) { directory.getAllChildren().filter { it.extension in listOf("jpg", "jpeg", "png") } }
     
     var childToDisplay by remember { mutableStateOf(children.random()) }
-    var bitmap by remember(childToDisplay) { mutableStateOf(childToDisplay.readBytes().decodeToImageBitmap())  }
     
     LaunchedEffect(Unit) {
         while(true) {
@@ -46,8 +45,7 @@ fun App(
             println("Change to $childToDisplay")
         }
     }
-
-    foo(bitmap)
+    Pic(childToDisplay)
 }
 
 @Composable
