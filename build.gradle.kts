@@ -24,6 +24,9 @@ dependencies {
     implementation(compose.components.resources)
 }
 
+compose.resources {
+    customDirectory("main", provider { layout.projectDirectory.dir("src/main/resources/composeResources") })
+}
 compose.desktop {
     application {
         mainClass = "br.com.colman.pikframe.MainKt"
