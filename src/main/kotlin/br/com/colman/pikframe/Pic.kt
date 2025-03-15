@@ -26,6 +26,6 @@ fun PicPreview() {
 @Composable
 @Preview
 fun Pic(file: File) {
-  require(file.extension in listOf("jpg", "jpeg", "png"))
+  require(file.extension.lowercase() in listOf("jpg", "jpeg", "png", "bmp", "webp"))
   Image(file.readBytes().decodeToImageBitmap(), null, Modifier.fillMaxSize())
 }

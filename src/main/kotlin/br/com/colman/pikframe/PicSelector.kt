@@ -9,7 +9,7 @@ private const val EmitPictureDelay = 2_000L
 
 class PicSelector(private val directory: File) {
   
-  private val children = directory.getAllChildren().filter { it.extension in listOf("jpg", "jpeg", "png") }
+  private val children = directory.getAllChildren().filter { it.extension.lowercase() in listOf("jpg", "jpeg", "png", "bmp", "webp") }
   
   init {
     if(!directory.isDirectory) throw IllegalArgumentException("The provided path must be a directory")
