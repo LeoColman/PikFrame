@@ -22,6 +22,9 @@ dependencies {
     // With compose.desktop.common you will also lose @Preview functionality
     implementation(compose.desktop.currentOs)
     implementation(compose.components.resources)
+    
+    implementation("com.sksamuel.hoplite:hoplite-core:2.9.0")
+    implementation("com.sksamuel.hoplite:hoplite-yaml:2.9.0")
 }
 
 compose.resources {
