@@ -4,5 +4,4 @@ import java.time.Duration
 
 data class PicSelectorConfig(
   val emitPictureDelay: Duration,
-  val selectionMode: PicSelectionMode
 )
