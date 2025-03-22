@@ -1,4 +1,4 @@
-package br.com.colman.pikframe.color
+package br.com.colman.pikframe.frame
 
 import androidx.compose.ui.graphics.Color
 import java.io.File
@@ -6,13 +6,12 @@ import javax.imageio.ImageIO
 import kotlin.math.sqrt
 import kotlin.random.Random
 
-fun getDominantColor(
-  file: File,
-  sampleStep: Int = 2,
-  k: Int = 10,
-  maxIterations: Int = 15
-): Color {
-  val image = ImageIO.read(file)
+fun File.getDominantColor(): Color {
+  val sampleStep = 2
+  val k = 10
+  val maxIterations = 15
+  
+  val image = ImageIO.read(this)
   val pixels = mutableListOf<Color>()
 
   // 1) Collect sample pixels

@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import br.com.colman.pikframe.color.getDominantColor
+import br.com.colman.pikframe.frame.getDominantColor
 import br.com.colman.pikframe.frame.Background
 import br.com.colman.pikframe.frame.Matte
 import br.com.colman.pikframe.picselector.RandomPicSelector
@@ -29,7 +29,7 @@ fun PictureFrame(
   matColor: Color = Color.White,
   matPadding: Dp = 8.dp,
 ) {
-  val dominantColor = remember(image) { getDominantColor(image) }
+  val dominantColor = remember(image) { image.getDominantColor() }
   Box(Modifier.fillMaxSize(), Alignment.Center) {
 
     Background(dominantColor)
