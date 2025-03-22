@@ -1,3 +1,2 @@
 picSelector:
-  emitPictureDelay: 500ms
-  selectionMode: RoundRobin
+  emitPictureDelay: 2500ms
