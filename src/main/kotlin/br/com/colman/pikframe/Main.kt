@@ -23,12 +23,7 @@ import br.com.colman.pikframe.pikframe.generated.resources.texture
 import br.com.colman.pikframe.shadow.ShadowedBox
 import com.sksamuel.hoplite.ConfigLoaderBuilder
 import org.jetbrains.compose.resources.painterResource
-import java.awt.image.BufferedImage
 import java.io.File
-import javax.imageio.ImageIO
-import kotlin.math.roundToInt
-import kotlin.math.sqrt
-import kotlin.random.Random
 
 
 val PikFrameConfig = ConfigLoaderBuilder.default().build().loadConfigOrThrow<Config>("/default-config.yaml")
