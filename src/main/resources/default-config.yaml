@@ -1,2 +1,3 @@
 picSelector:
-  emitPictureDelay: 2500ms
+  displayDuration: 10s
+  fadeDuration: 10s

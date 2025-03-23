@@ -1,11 +1,18 @@
 package br.com.colman.pikframe
 
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,7 +51,9 @@ fun App(directory: File) {
   val selector = remember(directory) { RandomPicSelector(directory) }
   val pictureToDisplay by selector.pictures.collectAsState(Cafe)
 
-  PictureFrame(pictureToDisplay)
+  Crossfade(pictureToDisplay, animationSpec = tween(PikFrameConfig.picSelector.fadeDuration.toMillis().toInt())) { 
+    PictureFrame(it)
+  }
 }
 
 fun main(args: Array<String>) = application {

@@ -25,6 +25,7 @@ dependencies {
     
     implementation("com.sksamuel.hoplite:hoplite-core:2.9.0")
     implementation("com.sksamuel.hoplite:hoplite-yaml:2.9.0")
+    implementation("com.drewnoakes:metadata-extractor:2.16.0")
 }
 
 compose.resources {

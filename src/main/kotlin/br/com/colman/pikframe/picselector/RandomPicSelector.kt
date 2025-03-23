@@ -15,7 +15,8 @@ class RandomPicSelector(private val directory: File) {
 
   val pictures = flow {
     while (true) {
-      delay(PikFrameConfig.picSelector.emitPictureDelay.toMillis())
+      delay(PikFrameConfig.picSelector.displayDuration.toMillis())
+      delay(PikFrameConfig.picSelector.fadeDuration.toMillis())
       emit(children.removeAt(Random.nextInt(children.size)))
       if (children.isEmpty()) children = directory.getAllImages().toMutableList()
     }
