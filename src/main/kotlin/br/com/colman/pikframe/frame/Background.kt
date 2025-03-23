@@ -11,11 +11,14 @@ import androidx.compose.ui.layout.ContentScale
 import br.com.colman.pikframe.pikframe.generated.resources.Res
 import br.com.colman.pikframe.pikframe.generated.resources.texture
 import org.jetbrains.compose.resources.painterResource
+import java.io.File
 
 @Composable
-fun Background(dominantColor: Color) {
-  BackgroundTexture()
-  BackgroundColor(dominantColor)
+fun Background(image: File, dominantColor: Color) {
+  Box {
+    BackgroundTexture()
+    BackgroundColor(dominantColor)
+  }
 }
 
 @Composable

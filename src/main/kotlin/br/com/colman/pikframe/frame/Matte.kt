@@ -19,7 +19,7 @@ fun Matte(
   mattePadding: Dp = 8.dp,
   content: @Composable () -> Unit
 ) {
-  ShadowedBox(matteColor, mattePadding, modifier = Modifier.padding(64.dp)) { content() }
+  ShadowedBox(matteColor, mattePadding, modifier = Modifier.padding(128.dp)) { content() }
 }
 
 @Composable

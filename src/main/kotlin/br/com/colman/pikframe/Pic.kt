@@ -51,53 +51,5 @@ fun Pic(file: File) {
   require(file.extension.lowercase() in listOf("jpg", "jpeg", "png", "bmp", "webp"))
   Box {
     Image(file.readBytes().decodeToImageBitmap(), null)
-    ExifData(file)
-  }
-}
-
-@OptIn(ExperimentalResourceApi::class)
-@Composable
-private fun BoxScope.ExifData(file: File) {
-  val exifDir = ImageMetadataReader.readMetadata(file).getFirstDirectoryOfType(ExifSubIFDDirectory::class.java)
-  val date = (exifDir?.dateOriginal ?: Date(file.lastModified())).let {
-    val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
-    formatter.format(it)
-  }
-  
-  val folderName = file.parentFile!!.name
-
-  ResizingTextContainer { fontSize ->
-    Column(Modifier.align(Alignment.BottomStart).padding(16.dp)) {
-      date?.let { date ->
-        Text(
-          text = date,
-          modifier = Modifier, fontSize = fontSize,
-          style = TextStyle(
-            color = Color.White,
-            shadow = Shadow(color = Color.Black, offset = Offset(5f, 5f), blurRadius = 2f)
-          )
-        )
-      }
-
-      Text(
-        text = folderName,
-        modifier = Modifier, fontSize = fontSize,
-        style = TextStyle(
-          color = Color.White,
-          shadow = Shadow(color = Color.Black, offset = Offset(5f, 5f), blurRadius = 2f)
-        )
-      )
-    }
-  }
-}
-
-@Composable
-private fun BoxScope.ResizingTextContainer(content: @Composable (textSize: TextUnit) -> Unit) {
-  var containerSize by remember { mutableStateOf(IntSize.Zero) }
-  Box(Modifier.matchParentSize().onSizeChanged(onSizeChanged = { containerSize = it })) {
-    val textSizeSp = with(LocalDensity.current) {
-      (containerSize.width * 0.03f).coerceAtLeast(16f).toSp()
-    }
-    content(textSizeSp)
   }
 }

@@ -22,6 +22,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import br.com.colman.pikframe.frame.getDominantColor
 import br.com.colman.pikframe.frame.Background
+import br.com.colman.pikframe.frame.ExifData
 import br.com.colman.pikframe.frame.Matte
 import br.com.colman.pikframe.picselector.RandomPicSelector
 import com.sksamuel.hoplite.ConfigLoaderBuilder
@@ -39,10 +40,11 @@ fun PictureFrame(
   val dominantColor = remember(image) { image.getDominantColor() }
   Box(Modifier.fillMaxSize(), Alignment.Center) {
 
-    Background(dominantColor)
+    Background(image, dominantColor)
     Matte(matColor, matPadding) {
       Pic(image)
     }
+    ExifData(image)
   }
 }
 
