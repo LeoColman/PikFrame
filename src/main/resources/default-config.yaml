@@ -1,3 +1,4 @@
 picSelector:
   displayDuration: 10s
   fadeDuration: 10s
+  dateFormat: dd, LLL - YYYY

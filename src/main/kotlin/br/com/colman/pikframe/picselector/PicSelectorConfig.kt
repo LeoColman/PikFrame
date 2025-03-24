@@ -4,5 +4,6 @@ import java.time.Duration
 
 data class PicSelectorConfig(
   val displayDuration: Duration,
-  val fadeDuration: Duration
+  val fadeDuration: Duration,
+  val dateFormat: String
 )
