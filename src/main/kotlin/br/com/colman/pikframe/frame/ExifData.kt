@@ -11,34 +11,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import br.com.colman.pikframe.PikFrameConfig
 import com.drew.imaging.ImageMetadataReader
 import com.drew.metadata.exif.ExifSubIFDDirectory
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.attribute.BasicFileAttributes
-import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId.systemDefault
-import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatter.ofPattern
 import java.util.Date
 
-@OptIn(ExperimentalResourceApi::class)
+private val dateFormat = PikFrameConfig.picSelector.dateFormat 
+private val locale = PikFrameConfig.picSelector.locale
+
 @Composable
 fun BoxScope.ExifData(file: File) {
-  val date = file.readCreationDate().format(ofPattern("LLL, yyyy"))
+  val date = file.readCreationDate().format(ofPattern(dateFormat, locale))
   val folderName = file.parentFile!!.name
   
   ResizingTextContainer { fontSize ->
     Text(
       text = "$date - $folderName",
-      modifier = Modifier.padding(16.dp).align(Alignment.BottomStart),
+      modifier = Modifier.padding(32.dp).align(Alignment.BottomStart),
       fontSize = fontSize,
       style = TextStyle(
         color = Color.White,
-        shadow = Shadow(color = Color.Black, offset = Offset(4f, 4f), blurRadius = 2f)
+        shadow = Shadow(color = Color.Black, offset = Offset(3f, 3f), blurRadius = 1f)
       )
     )
   }
@@ -46,7 +46,7 @@ fun BoxScope.ExifData(file: File) {
 
 private fun File.readCreationDate(): LocalDateTime {
   val exifDir = ImageMetadataReader.readMetadata(this).getFirstDirectoryOfType(ExifSubIFDDirectory::class.java)
-  return exifDir?.dateOriginal?.toLocalDateTime() ?: creationDate()
+  return exifDir?.dateOriginal?.toLocalDateTime() ?: exifDir?.dateDigitized?.toLocalDateTime() ?: creationDate()
 }
 
 private fun Date.toLocalDateTime() = LocalDateTime.ofInstant(Instant.ofEpochMilli(time), systemDefault())
