@@ -14,23 +14,21 @@ import androidx.compose.ui.unit.dp
 import br.com.colman.pikframe.PikFrameConfig
 import com.drew.imaging.ImageMetadataReader
 import com.drew.metadata.exif.ExifSubIFDDirectory
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.attribute.BasicFileAttributes
-import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId.systemDefault
-import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatter.ofPattern
 import java.util.Date
 
 private val dateFormat = PikFrameConfig.picSelector.dateFormat 
+private val locale = PikFrameConfig.picSelector.locale
 
 @Composable
 fun BoxScope.ExifData(file: File) {
-  val date = file.readCreationDate().format(ofPattern(dateFormat))
+  val date = file.readCreationDate().format(ofPattern(dateFormat, locale))
   val folderName = file.parentFile!!.name
   
   ResizingTextContainer { fontSize ->
@@ -40,7 +38,7 @@ fun BoxScope.ExifData(file: File) {
       fontSize = fontSize,
       style = TextStyle(
         color = Color.White,
-        shadow = Shadow(color = Color.Black, offset = Offset(5f, 5f), blurRadius = 3f)
+        shadow = Shadow(color = Color.Black, offset = Offset(3f, 3f), blurRadius = 1f)
       )
     )
   }
