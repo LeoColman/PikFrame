@@ -14,7 +14,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
+import androidx.compose.ui.window.rememberWindowState
 import br.com.colman.pikframe.utils.getDominantColor
 import br.com.colman.pikframe.frame.Background
 import br.com.colman.pikframe.frame.ExifData
@@ -54,7 +56,7 @@ fun App(directory: File) {
 }
 
 fun main(args: Array<String>) = application {
-  Window(onCloseRequest = ::exitApplication) {
+  Window(::exitApplication, rememberWindowState(WindowPlacement.Fullscreen)) {
     App(File(args[0]))
   }
 }
