@@ -1,4 +1,4 @@
-package br.com.colman.pikframe.utils
+package br.com.colman.pikframe.frame.background
 
 import androidx.compose.ui.graphics.Color
 import java.io.File

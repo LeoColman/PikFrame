@@ -1,4 +1,4 @@
-package br.com.colman.pikframe.frame
+package br.com.colman.pikframe.frame.background
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,9 +10,11 @@ import androidx.compose.ui.graphics.Color
 import br.com.colman.pikframe.pikframe.generated.resources.Res
 import br.com.colman.pikframe.pikframe.generated.resources.background_texture
 import org.jetbrains.compose.resources.painterResource
+import java.io.File
 
 @Composable
-fun Background(color: Color) {
+fun Background(image: File) {
+  val color = image.getDominantColor()
   Box {
     BackgroundTexture()
     BackgroundColor(color)
