@@ -7,31 +7,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import br.com.colman.pikframe.pikframe.generated.resources.Res
-import br.com.colman.pikframe.pikframe.generated.resources.texture
+import br.com.colman.pikframe.pikframe.generated.resources.background_texture
 import org.jetbrains.compose.resources.painterResource
-import java.io.File
 
 @Composable
-fun Background(image: File, dominantColor: Color) {
+fun Background(color: Color) {
   Box {
     BackgroundTexture()
-    BackgroundColor(dominantColor)
+    BackgroundColor(color)
   }
 }
 
 @Composable
-private fun BackgroundColor(dominantColor: Color) {
-  Box(Modifier.fillMaxSize().background(dominantColor.copy(alpha = 0.5f)))
+private fun BackgroundTexture() {
+  Image(painterResource(Res.drawable.background_texture), null, Modifier.fillMaxSize())
 }
 
 @Composable
-private fun BackgroundTexture() {
-  Image(
-    painterResource(Res.drawable.texture),
-    null,
-    Modifier.fillMaxSize(),
-    contentScale = ContentScale.Crop
-  )
+private fun BackgroundColor(color: Color) {
+  Box(Modifier.fillMaxSize().background(color.copy(alpha = 0.5f)))
 }

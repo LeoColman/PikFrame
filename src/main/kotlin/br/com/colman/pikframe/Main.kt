@@ -37,7 +37,7 @@ fun PictureFrame(
   val dominantColor = remember(image) { image.getDominantColor() }
   Box(Modifier.fillMaxSize(), Alignment.Center) {
 
-    Background(image, dominantColor)
+    Background(dominantColor)
     Matte(matColor, matPadding) {
       Pic(image)
     }

@@ -1,5 +1,5 @@
 picSelector:
-  displayDuration: 10s
-  fadeDuration: 10s
+  displayDuration: 5s
+  fadeDuration: 5s
   dateFormat: dd 'de' MMMM 'de' YYYY
   locale: pt-BR
