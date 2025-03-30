@@ -1,6 +1,6 @@
-package br.com.colman.pikframe.frame
+package br.com.colman.pikframe.frame.data
 
-import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -23,24 +23,26 @@ import java.time.ZoneId.systemDefault
 import java.time.format.DateTimeFormatter.ofPattern
 import java.util.Date
 
-private val dateFormat = PikFrameConfig.picSelector.dateFormat 
+private val dateFormat = PikFrameConfig.picSelector.dateFormat
 private val locale = PikFrameConfig.picSelector.locale
 
 @Composable
-fun BoxScope.ExifData(file: File) {
+fun ExifData(file: File) {
   val date = file.readCreationDate().format(ofPattern(dateFormat, locale))
   val folderName = file.parentFile!!.name
-  
-  ResizingTextContainer { fontSize ->
-    Text(
-      text = "$date - $folderName",
-      modifier = Modifier.padding(32.dp).align(Alignment.BottomStart),
-      fontSize = fontSize,
-      style = TextStyle(
-        color = Color.White,
-        shadow = Shadow(color = Color.Black, offset = Offset(3f, 3f), blurRadius = 1f)
+
+  Box {
+    ResizingTextContainer { fontSize ->
+      Text(
+        text = "$date - $folderName",
+        modifier = Modifier.padding(32.dp).align(Alignment.BottomStart),
+        fontSize = fontSize,
+        style = TextStyle(
+          color = Color.White,
+          shadow = Shadow(color = Color.Black, offset = Offset(3f, 3f), blurRadius = 1f)
+        )
       )
-    )
+    }
   }
 }
 
@@ -54,6 +56,6 @@ private fun Date.toLocalDateTime() = LocalDateTime.ofInstant(Instant.ofEpochMill
 private fun File.creationDate(): LocalDateTime {
   val attributes = Files.readAttributes(toPath(), BasicFileAttributes::class.java)
   val fileTime = attributes.creationTime()
-  
+
   return fileTime.toInstant().atZone(systemDefault()).toLocalDateTime()
 }

@@ -17,9 +17,8 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import br.com.colman.pikframe.frame.background.getDominantColor
 import br.com.colman.pikframe.frame.background.Background
-import br.com.colman.pikframe.frame.ExifData
+import br.com.colman.pikframe.frame.data.ExifData
 import br.com.colman.pikframe.frame.Matte
 import br.com.colman.pikframe.picselector.RandomPicSelector
 import com.sksamuel.hoplite.ConfigLoaderBuilder
