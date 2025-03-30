@@ -21,7 +21,7 @@ private val locale = PikFrameConfig.picSelector.locale
 
 @Composable
 fun ExifData(file: File) {
-  val creationDate = file.creationDate.format(ofPattern(dateFormat, locale))
+  val creationDate = file.creationDateTime.format(ofPattern(dateFormat, locale))
   val folderName = file.parentFile!!.name
 
   BoxWithConstraints(Modifier.fillMaxSize()) {
