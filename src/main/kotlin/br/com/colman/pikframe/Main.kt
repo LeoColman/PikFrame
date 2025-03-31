@@ -17,9 +17,11 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import br.com.colman.pikframe.frame.Cafe
 import br.com.colman.pikframe.frame.background.Background
 import br.com.colman.pikframe.frame.data.ExifData
 import br.com.colman.pikframe.frame.Matte
+import br.com.colman.pikframe.frame.Pic
 import br.com.colman.pikframe.picselector.RandomPicSelector
 import com.sksamuel.hoplite.ConfigLoaderBuilder
 import java.io.File
