@@ -17,33 +17,18 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import br.com.colman.pikframe.frame.Cafe
+import br.com.colman.pikframe.frame.PictureFrame
+import br.com.colman.pikframe.frame.picture.Cafe
 import br.com.colman.pikframe.frame.background.Background
 import br.com.colman.pikframe.frame.data.ExifData
-import br.com.colman.pikframe.frame.Matte
-import br.com.colman.pikframe.frame.Pic
+import br.com.colman.pikframe.frame.picture.Matte
+import br.com.colman.pikframe.frame.picture.Pic
 import br.com.colman.pikframe.picselector.RandomPicSelector
 import com.sksamuel.hoplite.ConfigLoaderBuilder
 import java.io.File
 
 
 val PikFrameConfig = ConfigLoaderBuilder.default().build().loadConfigOrThrow<Config>("/default-config.yaml")
-
-@Composable
-fun PictureFrame(
-  image: File,
-  matColor: Color = Color.White,
-  matPadding: Dp = 8.dp,
-) {
-  Box(Modifier.fillMaxSize(), Alignment.Center) {
-
-    Background(image)
-    Matte(matColor, matPadding) {
-      Pic(image)
-    }
-    ExifData(image)
-  }
-}
 
 @Composable
 fun App(directory: File) {

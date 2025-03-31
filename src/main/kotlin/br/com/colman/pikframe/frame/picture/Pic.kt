@@ -1,4 +1,4 @@
-package br.com.colman.pikframe.frame
+package br.com.colman.pikframe.frame.picture
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image

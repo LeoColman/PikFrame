@@ -1,4 +1,4 @@
-package br.com.colman.pikframe.frame
+package br.com.colman.pikframe.frame.picture
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,11 +15,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Matte(
-  matteColor: Color,
-  mattePadding: Dp = 8.dp,
+  color: Color,
+  padding: Dp = 8.dp,
   content: @Composable () -> Unit
 ) {
-  ShadowedBox(matteColor, mattePadding, modifier = Modifier.padding(128.dp)) { content() }
+  ShadowedBox(color, padding, modifier = Modifier.padding(128.dp)) { content() }
 }
 
 @Composable
