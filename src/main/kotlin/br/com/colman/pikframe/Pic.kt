@@ -49,7 +49,5 @@ fun PicPreview() {
 @Preview
 fun Pic(file: File) {
   require(file.extension.lowercase() in listOf("jpg", "jpeg", "png", "bmp", "webp"))
-  Box {
-    Image(file.readBytes().decodeToImageBitmap(), null)
-  }
+  Image(file.readBytes().decodeToImageBitmap(), null)
 }
