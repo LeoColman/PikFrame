@@ -21,64 +21,56 @@ fun File.getDominantColor(): Color {
     iterate(pixels, centroids)
   }
 
-  val (red, green, blue) = centroids.maxBy<List<Double>, Int> { it.size }
-
-  return Color(
-    (red * 255).coerceIn(0.0, 255.0).toInt(),
-    (green * 255).coerceIn(0.0, 255.0).toInt(),
-    (blue * 255).coerceIn(0.0, 255.0).toInt()
-  )
+  val clusters = pixels.groupBy { px ->
+    centroids.minBy { centroid -> colorDistance(px, centroid) }
+  }
+  
+  val (dominantColor, _) = clusters.maxBy { it.value.size }
+  
+  return dominantColor
 }
 
-private fun collectSamplePixels(image: BufferedImage): List<Color> {
-  val pixels = mutableListOf<Color>()
+private fun collectSamplePixels(image: BufferedImage) = buildList {
   for (x in 0 until image.width step SampleStep) {
     for (y in 0 until image.height step SampleStep) {
       val rgb = image.getRGB(x, y)
       val r = (rgb shr 16) and 0xFF
       val g = (rgb shr 8) and 0xFF
       val b = rgb and 0xFF
-      pixels += Color(r, g, b)
+      add(Color(r, g, b))
     }
   }
-  return pixels.ifEmpty { error("No pixels found in the image.") }
-}
+}.ifEmpty { error("No pixels found in the image.") }
 
-private fun initializeCentroids(pixels: List<Color>) = MutableList(K) { pixels.random().toVector() }
+private fun initializeCentroids(pixels: List<Color>) = MutableList(K) { pixels.random() }
 
-private fun iterate(pixels: List<Color>, centroids: MutableList<List<Double>>) {
+private fun iterate(pixels: List<Color>, centroids: MutableList<Color>) {
   val clusters = pixels.groupBy { px ->
-    centroids.minBy { centroid -> colorDistance(px.toVector(), centroid) }
+    centroids.minBy { centroid -> colorDistance(px, centroid) }
   }
 
   centroids.forEachIndexed { index, oldCentroid ->
     val cluster = clusters.getValue(oldCentroid)
-    centroids[index] = cluster.map(Color::toVector).reduce { acc, v -> acc + v }.div(cluster.size)
+    centroids[index] = averageColor(cluster)
   }
 }
 
+fun averageColor(cluster: List<Color>): Color {
+  val size = cluster.size
+  val sumRed = cluster.sumOf { it.red.toDouble() }
+  val sumGreen = cluster.sumOf { it.green.toDouble() }
+  val sumBlue = cluster.sumOf { it.blue.toDouble() }
 
-private fun Color.toVector() = listOf(red.toDouble(), green.toDouble(), blue.toDouble())
+  return Color(
+    (sumRed / size).coerceIn(0.0, 255.0).toFloat(),
+    (sumGreen / size).coerceIn(0.0, 255.0).toFloat(),
+    (sumBlue / size).coerceIn(0.0, 255.0).toFloat()
+  )
+}
 
-private operator fun List<Double>.plus(other: List<Double>) = listOf(
-  this[0] + other[0],
-  this[1] + other[1],
-  this[2] + other[2]
-)
-
-private fun List<Double>.div(value: Int) = listOf(
-  this[0] / value,
-  this[1] / value,
-  this[2] / value
-)
-
-private fun colorDistance(vector1: List<Double>, vector2: List<Double>): Double {
-  val (red1, green1, blue1) = vector1
-  val (red2, green2, blue2) = vector2
-
-  val distanceRedSquared = (red1 - red2).pow(2)
-  val distanceGreenSquared = (green1 - green2).pow(2)
-  val distanceBlueSquared = (blue1 - blue2).pow(2)
-
-  return sqrt(distanceRedSquared + distanceGreenSquared + distanceBlueSquared)
+private fun colorDistance(c1: Color, c2: Color): Double {
+  val distanceRed = (c1.red - c2.red).toDouble().pow(2)
+  val distanceGreen = (c1.green - c2.green).toDouble().pow(2)
+  val distanceBlue = (c1.blue - c2.blue).toDouble().pow(2)
+  return sqrt(distanceRed + distanceGreen + distanceBlue)
 }
