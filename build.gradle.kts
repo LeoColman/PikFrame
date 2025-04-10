@@ -1,9 +1,11 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     kotlin("jvm")
     id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "br.com.colman.pikframe"
@@ -42,3 +44,16 @@ compose.desktop {
         }
     }
 }
+
+tasks.named<ShadowJar>("shadowJar") {
+    mergeServiceFiles()
+
+    archiveVersion.set("$version-desktop-shadow")
+
+    destinationDirectory.set(layout.buildDirectory.dir("libs"))
+
+    manifest {
+        attributes["Main-Class"] = "br.com.colman.pikframe.MainKt"
+    }
+}
+
