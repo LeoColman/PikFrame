@@ -3,3 +3,4 @@ picSelector:
   fadeDuration: 5s
   dateFormat: dd 'de' MMMM 'de' YYYY
   locale: pt-BR
+  pictureDirectory: ~/Pictures
