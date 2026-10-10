@@ -26,7 +26,7 @@ dependencies {
     implementation(compose.desktop.linux_arm64)
     implementation(compose.components.resources)
     
-    implementation("com.sksamuel.hoplite:hoplite-core:2.9.0")
+    implementation("com.sksamuel.hoplite:hoplite-core:3.0.3")
     implementation("com.sksamuel.hoplite:hoplite-yaml:2.9.0")
     implementation("com.drewnoakes:metadata-extractor:2.19.0")
 }
